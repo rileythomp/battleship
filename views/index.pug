@@ -1,0 +1,20 @@
+doctype html
+
+html
+  head
+    title Battleship
+    link(rel='stylesheet', href='public/style.css')
+
+  body
+    div(class='centered')
+      include table.pug
+      include table.pug
+      p(id='player-instruction') 
+    
+    button(id='shuffle-ships') shuffle ship
+    button(id='begin-game') start
+
+  script(src='/socket.io/socket.io.js')
+  script(src='/public/bower/jquery/dist/jquery.min.js')
+  script(src='/public/js/game/Game.js')
+  script(src='/public/js/client.js')
