@@ -1,10 +1,9 @@
 {
-  "name": "game-framework",
-  "description": "A basic multiplayer game framework",
+  "name": "battlehsip",
+  "description": "A live 2 player battleship game",
   "main": "server.js",
   "authors": [
-    "Alvin Lin",
-    "Kenneth Li"
+    "rileythomp"
   ],
   "license": "MIT",
   "moduleType": [],
@@ -13,9 +12,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
     "jquery": "^3.1.1",
