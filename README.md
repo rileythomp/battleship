@@ -2,6 +2,7 @@
 
 Live 2 player battleship game made with Socket.IO
 
+![battleship](battleship.png)
 
 To run locally:
 
