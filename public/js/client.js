@@ -3,6 +3,10 @@ Element.prototype.remove = function() {
 }
 
 $(document).ready(function() {
+  $('.close').click(function() {
+    $('#modal').hide();
+  })
+  $('button').hide();
   var socket = io();
 
   var game = Game.create(socket);

@@ -1,3 +1,9 @@
+body {
+    font-family: 'Raleway';
+    background-color: #00003B;
+    color: white;
+}
+
 table {
     border-collapse: collapse;
     display: inline-block;
@@ -5,11 +11,69 @@ table {
 }
 
 td {
-    height: 3em;
-    width: 3em;
-    border: 1px solid black
+    height: 2.9em;
+    width: 2.9em;
+    border: 2px solid darkblue;
+    background-color: lightblue;
+}
+
+#github-link {
+    position: fixed;
+    bottom: 0.5em;
+    right: 1em;
+    color: inherit;
+    font-size: 2.5em;
+}
+
+button {
+    margin: 0.5em;
+    padding: 0.5em;
+    width: 8em;
+    font-size: 0.9em;
+    border-radius: 0.1em;
+    border: none;
+    background-color: whitesmoke;
+    color: #00003b;
+    font-family: 'Raleway';
+}
+
+button:hover, button:focus {
+    cursor: pointer;
 }
 
 .centered {
     text-align: center;
+    margin: 0 auto;
+}
+
+#modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 35%;
+    top: 30%;
+    background-color: #00003B;
+    margin: auto;
+    margin-top: 1.5em;
+    padding: 0.5em 1.5em;
+    border: 3px solid whitesmoke;
+    border-radius: 5px;
+    width: 30%;
+}
+
+#modal-text {
+    font-weight: bold;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: whitesmoke;
+    text-decoration: none;
+    cursor: point;
 }

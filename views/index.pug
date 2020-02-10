@@ -1,20 +1,31 @@
 doctype html
 
 html
-  head
-    title Battleship
-    link(rel='stylesheet', href='public/style.css')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width,initial-scale=1')
+        title Battleship
+        link(rel='stylesheet', href='public/style.css')
+        link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+        link(rel='stylesheet' href='//fonts.googleapis.com/css?family=Poppins|Rubik|Lato|Raleway' type='text/css')
 
-  body
-    div(class='centered')
-      include table.pug
-      include table.pug
-      p(id='player-instruction') 
-    
-    button(id='shuffle-ships') shuffle ship
-    button(id='begin-game') start
+    body
+        h2(style='text-align: center') Battleship
+        div(class='centered boards')
+            include table.pug
+            include table.pug
+            p(id='player-instruction') 
+            button(id='shuffle-ships') Shuffle ships
+            br
+            button(id='begin-game') Start
+            div(id='modal')
+                span(class='close') &times;
+                p(id='modal-text')
+        a(id='github-link' target='blank' href='https://github.com/rileythomp/battleship')
+            i(class='fa fa-github')
+        
 
-  script(src='/socket.io/socket.io.js')
-  script(src='/public/bower/jquery/dist/jquery.min.js')
-  script(src='/public/js/game/Game.js')
-  script(src='/public/js/client.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/public/bower/jquery/dist/jquery.min.js')
+    script(src='/public/js/game/Game.js')
+    script(src='/public/js/client.js')

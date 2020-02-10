@@ -27,7 +27,7 @@ app.use('/', (request, response) => {
 io.on('connection', (socket) => {
   socket.on('player-join', () => {
     if (game.clients.size == 2) {
-        socket.emit('nogameavailable');
+        socket.emit('no-game-available');
         return;
     }
 
@@ -53,9 +53,13 @@ io.on('connection', (socket) => {
 
   socket.on('begin-game', () => {
     game.playersReady += 1;
-    if (game.playersReady == 2) {
+    if (game.playersReady == 1) {
+      socket.emit('waiting-for-other-player-to-start');
+    }
+    else if (game.playersReady == 2) {
       game.begin();
     }
+
   });
 
   socket.on('player-guess', (data) => {
