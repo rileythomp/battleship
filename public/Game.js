@@ -30,11 +30,23 @@ Game.prototype.init = function () {
     that.socket.emit('begin-game');
   })
 
-  this.socket.on('no-game-available', function (data) {
+  this.socket.on('other-player-quit', function() {
+    for (let row = 0; row < 10; ++row) {
+      for (let col = 0; col < 10; ++col) {
+        let cell = document.getElementById('opponentBoard').children[0].children[row].children[col];
+        cell.classList.remove('clickable');
+      }
+	}
+	showModal('Uh oh, the other player has quit theh game. Refresh to start a new game', 9000);
+	$('#player-instruction').html('');
+	$('button').hide();
+  })
+
+  this.socket.on('no-game-available', function () {
     $('.boards').hide();
     $('h2').html('Sorry, there aren\'t any games available at the moment, please try again later.');
   });
-  this.socket.on('waiting-for-player', function (data) {
+  this.socket.on('waiting-for-player', function () {
     $('#player-instruction').html('Waiting for other player to join...');
   });
 
@@ -49,11 +61,11 @@ Game.prototype.init = function () {
     displayPlayerBoard(data.playerBoard);
     displayOpponentBoard(data.opponentBoard);
     if (data.playerBoard.shipsSunk == 5) {
-      showModal('Oh no! Your opponent sunk all your battleships so you\'ve lost the game.', 10000);
+      showModal('Oh no! Your opponent sunk all your battleships so you\'ve lost the game.', 9000);
       $('#player-instruction').html('');
     }
     else if (data.opponentBoard.shipsSunk == 5) {
-      showModal('Congrats! You sunk all your opponent\'s battleships and won the game!', 10000);
+      showModal('Congrats! You sunk all your opponent\'s battleships and won the game!', 9000);
       $('#player-instruction').html('');
     }
   });
@@ -87,7 +99,7 @@ Game.prototype.init = function () {
     updateGame(data);
   })
 
-  this.socket.on('waiting-for-other-player-to-start', function(data) {
+  this.socket.on('waiting-for-other-player-to-start', function() {
     $('#player-instruction').html('Waiting for other play to start the game...');
   })
 
@@ -133,15 +145,15 @@ displayPlayerBoard = function (board) {
       }
       else if (board.grid[row][col].state == CellStates.SHIP) {
         tableCell.style.backgroundColor = 'grey';
-        tableCell.style.border = '2px solid black';
+        tableCell.style.border = '2px double black';
       }
       else if (board.grid[row][col].state == CellStates.HIT_SHIP) {
         tableCell.style.backgroundColor = 'red';
-        tableCell.style.border = '2px solid black';
+        tableCell.style.border = '2px double black';
       }
       else if (board.grid[row][col].state == CellStates.SUNK_SHIP) {
         tableCell.style.backgroundColor = 'black';
-        tableCell.style.border = '2px solid black';
+        tableCell.style.border = '2px double black';
       }
       else {
         tableCell.style.backgroundColor = 'lightblue';
@@ -167,7 +179,7 @@ displayOpponentBoard = function (board) {
       else if (board.grid[row][col].state == CellStates.SUNK_SHIP) {
         tableCell.style.backgroundColor = 'black';
         tableCell.classList.remove('clickable');
-        tableCell.style.border = '2px solid black';
+        tableCell.style.border = '2px double black';
       }
       else {
         tableCell.style.backgroundColor = 'lightblue';

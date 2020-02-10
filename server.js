@@ -44,7 +44,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    // game.removePlayer(socket.id);
+    game.removePlayer(socket.id);
+    let ids = game.clients.keys();
+    if (ids.length > 0) {
+      game.clients.get(ids[0]).emit('other-player-quit');
+    }
   })
 
   socket.on('shuffle-ships', () => {
