@@ -2,7 +2,8 @@ let CellStates = {
   EMPTY: 0,
   MISSED: 1,
   SHIP: 2,
-  HIT_SHIP: 3
+  HIT_SHIP: 3,
+  SUNK_SHIP: 4
 }
 
 function Game(socket) {
@@ -46,7 +47,33 @@ Game.prototype.init = function () {
   this.socket.on('update-boards', function(data) {
     displayPlayerBoard(data.playerBoard);
     displayOpponentBoard(data.opponentBoard);
+    if (data.playerBoard.shipsSunk == 5) {
+      alert('you lose');
+    }
+    else if (data.opponentBoard.shipsSunk == 5) {
+      alert('you win');
+    }
   });
+
+  // this.socket.on('you-sunk-a-ship', function(data) {
+  //   // alert('you sunk a ship');
+  //   for (let i = 0; i < data.ship.coords.length; ++i) {
+  //     let row = data.ship.coords[i].row;
+  //     let col = data.ship.coords[i].col;
+  //     let cell = document.getElementById('opponentBoard').children[0].children[row].children[col];
+  //     cell.style.backgroundColor = 'pink';
+  //   }
+  // })
+
+  // this.socket.on('your-ship-got-sunk', function(data) {
+  //   // alert('your ship got sunk');
+  //   for (let i = 0; i < data.ship.coords.length; ++i) {
+  //     let row = data.ship.coords[i].row;
+  //     let col = data.ship.coords[i].col;
+  //     let cell = document.getElementById('playerBoard').children[0].children[row].children[col];
+  //     cell.style.backgroundColor = 'pink';
+  //   }
+  // })
 
   this.socket.on('start-game', function(data) {
     for (let row = 0; row < 10; ++row) {
@@ -66,7 +93,7 @@ Game.prototype.init = function () {
   });
 
   this.socket.on('update-messages', function(data) {
-    updateGame(data, that.socket);
+    updateGame(data);
   })
 
   this.socket.emit('player-join');
@@ -74,7 +101,7 @@ Game.prototype.init = function () {
 
 updateGame = function(data) {
   updateOpponentBoard(data.turnToMove);
-  updateMessage(data.turnToMove);;
+  updateMessage(data.turnToMove);
 }
 
 updateMessage = function(turnToMove) {
@@ -105,14 +132,17 @@ displayPlayerBoard = function (board) {
     for (let col = 0; col < board.width; ++col) {
       let tableCell = document.getElementsByClassName('board')[0].children[0].children[row].children[col];
 
-      if (board.grid[row][col] == CellStates.MISSED) {
+      if (board.grid[row][col].state == CellStates.MISSED) {
         tableCell.style.backgroundColor = 'white';
       }
-      else if (board.grid[row][col] == CellStates.SHIP) {
+      else if (board.grid[row][col].state == CellStates.SHIP) {
         tableCell.style.backgroundColor = 'grey';
       }
-      else if (board.grid[row][col] == CellStates.HIT_SHIP) {
+      else if (board.grid[row][col].state == CellStates.HIT_SHIP) {
         tableCell.style.backgroundColor = 'red';
+      }
+      else if (board.grid[row][col].state == CellStates.SUNK_SHIP) {
+        tableCell.style.backgroundColor = 'pink';
       }
       else {
         tableCell.style.backgroundColor = 'lightblue';
@@ -126,11 +156,14 @@ displayOpponentBoard = function (board) {
     for (let col = 0; col < board.width; ++col) {
       let tableCell = document.getElementsByClassName('board')[1].children[0].children[row].children[col];
 
-      if (board.grid[row][col] == CellStates.MISSED) {
+      if (board.grid[row][col].state == CellStates.MISSED) {
         tableCell.style.backgroundColor = 'white';
       }
-      else if (board.grid[row][col] == CellStates.HIT_SHIP) {
+      else if (board.grid[row][col].state == CellStates.HIT_SHIP) {
         tableCell.style.backgroundColor = 'red';
+      }
+      else if (board.grid[row][col].state == CellStates.SUNK_SHIP) {
+        tableCell.style.backgroundColor = 'pink';
       }
       else {
         tableCell.style.backgroundColor = 'lightblue';
