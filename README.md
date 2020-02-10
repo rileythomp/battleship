@@ -1,30 +1,16 @@
-# game-framework
-This is a generic multiplayer game framework used by me. The master branch
-contains a minimal implementation of multiplayer interaction on top of which
-more functionality can be added. Read about it How To Build A Multiplayer Game
-[part one](https://medium.com/@omgimanerd/how-to-build-a-multiplayer-browser-game-4a793818c29b#.cgcrdee49) and [part two](https://medium.com/@omgimanerd/how-to-build-a-multiplayer-browser-game-part-2-2edd112aabdf#.nze6w0pgs).
+# battleship
 
-## Games Built With This Framework
-  - [tankanarchy](https://www.github.com/penumbragames/tankanarchy)
-  - [blockwars](https://www.github.com/penumbragames/blockwars)
-  - [obsidio](https://www.github.com/penumbragames/obsidio)
-  - [git-to-the-hub](https://www.github.com/penumbragames/git-to-the-hub)
-  - [fightmeirl](https://www.github.com/omgimanerd/fightmeirl)
-  - [explosive-firerrhea](https://www.github.com/karlcoehlo/brickhack3)
+Live 2 player battleship game made with Socket.IO
 
-## Setting Up:
-  This project requires node version 0.12 or greater.
-  npm, bower and gulp should be installed globally on your system.
-  ```
-  npm install
-  bower install
-  ```
 
-## Creators:
-  - Alvin Lin (omgimanerd)
-  - Kenneth Li (noobbyte)
+To run locally:
 
-## License
-[MIT](https://opensource.org/licenses/MIT)
+```$ git clone https://github.com/rileythomp/battleship.git```
 
-&copy; 2017 Penumbra Games
+```$ cd battleship```
+
+```$ npm i```
+
+```$ npm start```
+
+Then go to localhost:3000 in two different browser tabs.
