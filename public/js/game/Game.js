@@ -55,26 +55,6 @@ Game.prototype.init = function () {
     }
   });
 
-  // this.socket.on('you-sunk-a-ship', function(data) {
-  //   // alert('you sunk a ship');
-  //   for (let i = 0; i < data.ship.coords.length; ++i) {
-  //     let row = data.ship.coords[i].row;
-  //     let col = data.ship.coords[i].col;
-  //     let cell = document.getElementById('opponentBoard').children[0].children[row].children[col];
-  //     cell.style.backgroundColor = 'pink';
-  //   }
-  // })
-
-  // this.socket.on('your-ship-got-sunk', function(data) {
-  //   // alert('your ship got sunk');
-  //   for (let i = 0; i < data.ship.coords.length; ++i) {
-  //     let row = data.ship.coords[i].row;
-  //     let col = data.ship.coords[i].col;
-  //     let cell = document.getElementById('playerBoard').children[0].children[row].children[col];
-  //     cell.style.backgroundColor = 'pink';
-  //   }
-  // })
-
   this.socket.on('start-game', function(data) {
     for (let row = 0; row < 10; ++row) {
       for (let col = 0; col < 10; ++col) {
