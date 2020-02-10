@@ -37,7 +37,7 @@ Game.prototype.init = function () {
         cell.classList.remove('clickable');
       }
 	}
-	showModal('Uh oh, the other player has quit theh game. Refresh to start a new game', 9000);
+	showModal('Uh oh, the other player has quit the game. Refresh to start a new game', 9000);
 	$('#player-instruction').html('');
 	$('button').hide();
   })
